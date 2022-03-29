@@ -1,7 +1,7 @@
 import './SavedWords.css';
 
 const SavedWords = () => {
-    console.log('Saved words is working!');
+    console.log('Saved words is working! Thank God!');
     const wordList = [];
     
     const savedWordsOutput = () => {
