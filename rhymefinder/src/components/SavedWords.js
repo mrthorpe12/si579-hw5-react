@@ -1,8 +1,9 @@
 import './SavedWords.css';
 
-const SavedWords = () => {
+const SavedWords = (props) => {
     console.log('Saved words is working! Thank God!');
-    const wordList = [];
+    const wordList = props.saveWord;
+    console.log(wordList);
     
     const savedWordsOutput = () => {
         // return wordList;

@@ -7,28 +7,27 @@ const WordOutput = (props) => {
 
     if (props.rhymeFlag) {
         header = `Words that rhyme with ${props.userWord}`;
-        dataOutput.push(props.rhymeData[0]);
-        console.log(dataOutput);
+        // console.log(`PROPS: ${props.rhymeData}`);
+        dataOutput = props.rhymeData;
+        // console.log(dataOutput);
     } else if (props.synonymFlag) {
         header = `Words with a similar meaning to ${props.userWord}`;
-        dataOutput.push(props.synonymData);
+        dataOutput = props.synonymData;
     }
 
-    dataOutput = dataOutput.map((i) => <li>{i}<button className="save">Save</button></li>)
-
     /**
-         * Returns a list of objects grouped by some property. For example:
-         * groupBy([{name: 'Steve', team:'blue'}, {name: 'Jack', team: 'red'}, {name: 'Carol', team: 'blue'}], 'team')
-         *
-         * returns:
-         * { 'blue': [{name: 'Steve', team: 'blue'}, {name: 'Carol', team: 'blue'}],
-         *    'red': [{name: 'Jack', team: 'red'}]
-         * }
-         *
-         * @param {any[]} objects: An array of objects
-         * @param {string|Function} property: A property to group objects by
-         * @returns  An object where the keys representing group names and the values are the items in objects that are in that group
-         */
+     * Returns a list of objects grouped by some property. For example:
+     * groupBy([{name: 'Steve', team:'blue'}, {name: 'Jack', team: 'red'}, {name: 'Carol', team: 'blue'}], 'team')
+     *
+     * returns:
+     * { 'blue': [{name: 'Steve', team: 'blue'}, {name: 'Carol', team: 'blue'}],
+     *    'red': [{name: 'Jack', team: 'red'}]
+     * }
+     *
+     * @param {any[]} objects: An array of objects
+     * @param {string|Function} property: A property to group objects by
+     * @returns  An object where the keys representing group names and the values are the items in objects that are in that group
+     */
     function groupBy(objects, property) {
         // If property is not a function, convert it to a function that accepts one argument (an object) and returns that object's
         // value for property (obj[property])

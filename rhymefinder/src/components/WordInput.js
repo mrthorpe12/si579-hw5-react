@@ -1,5 +1,8 @@
 import './WordInput.css';
 
+let rhymeArray = [];
+let synonymArray = [];
+
 const WordInput = (props) => {
 
     /**
@@ -53,18 +56,32 @@ const WordInput = (props) => {
         return `https://api.datamuse.com/words?${(new URLSearchParams({ 'ml': input })).toString()}`;
     }
 
+    // function keyHandler(e) {
+    //     if (e.key === 'Enter') {
+    //         rhymeHandler();
+    //     }
+    // }
+
+    function saveHandler(input) {
+        props.saveWord.push(input)
+    }
+
     function rhymeHandler() {
         props.setRhymeFlag(true);
         datamuseRequest(getDatamuseRhymeUrl(props.userWord), (results) => {
-            console.log(results.toString().split(', '));
-            props.setRhymeData(results.toString().split(', '));
+            console.log(results);
+            rhymeArray = results.map((i) => <li key={i.toString()}>{i.word}<button className="save" onClick={saveHandler(i.word)}>Save</button></li>)
+            // props.rhymeData.push(rhymeArray);
+            props.setRhymeData(rhymeArray);
+            console.log(props.rhymeData);
         });
     }
 
     function synonymHandler() {
         props.setSynonymFlag(true);
         datamuseRequest(getDatamuseSimilarToUrl(props.userWord), (results) => {
-            props.setSynonymData(results.toString().split(', '));
+            synonymArray = results.map((i) => <li key={i.toString()}>{i.word}<button className="save" onClick={saveHandler(i.word)}>Save</button></li>)
+            props.synonymData.push(synonymArray);
         });
     }
 
