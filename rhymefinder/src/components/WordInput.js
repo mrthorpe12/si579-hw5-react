@@ -63,7 +63,7 @@ const WordInput = (props) => {
     // }
 
     function saveHandler(input) {
-        props.saveWord.push(input)
+        props.saveWord.push(input);
     }
 
     function rhymeHandler() {
@@ -82,6 +82,7 @@ const WordInput = (props) => {
         datamuseRequest(getDatamuseSimilarToUrl(props.userWord), (results) => {
             synonymArray = results.map((i) => <li key={i.toString()}>{i.word}<button className="save" onClick={saveHandler(i.word)}>Save</button></li>)
             props.synonymData.push(synonymArray);
+            console.log(props.synonymData);
         });
     }
 

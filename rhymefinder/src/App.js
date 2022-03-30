@@ -22,6 +22,7 @@ function App() {
     return (
         <main className="container">
             <h1 className="row">Rhyme Finder (579 Problem Set 6)</h1>
+            <p>Repo: https://github.com/mrthorpe12/si579-hw5-react</p>
             <SavedWords saveWord={saveWord} setSaveWord={setSaveWord} />
             <WordInput userWord={userWord} setUserWord={setUserWord} rhymeData={rhymeData} setRhymeData={setRhymeData} synonymData={synonymData} setSynonymData={setSynonymData} rhymeFlag={rhymeFlag} setRhymeFlag={setRhymeFlag} synonymFlag={synonymFlag} setSynonymFlag={setSynonymFlag} saveWord={saveWord} setSaveWord={setSaveWord} />
             <WordOutput userWord={userWord} rhymeData={rhymeData} synonymData={synonymData} rhymeFlag={rhymeFlag} synonymFlag={synonymFlag} saveWord={saveWord} setSaveWord={setSaveWord} />
