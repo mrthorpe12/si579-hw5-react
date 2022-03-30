@@ -2,6 +2,7 @@ import './WordInput.css';
 
 let rhymeArray = [];
 let synonymArray = [];
+let savedWordArray = [];
 
 const WordInput = (props) => {
 
@@ -62,16 +63,18 @@ const WordInput = (props) => {
     //     }
     // }
 
-    function saveHandler(input) {
-        props.saveWord.push(input);
+    const saveHandler = (input) => {
+        console.log(`Input: ${input}`);
+        savedWordArray.push(input);
+        props.setSaveWord(savedWordArray);
+        console.log(props.saveWord);
     }
 
     function rhymeHandler() {
         props.setRhymeFlag(true);
         datamuseRequest(getDatamuseRhymeUrl(props.userWord), (results) => {
             console.log(results);
-            rhymeArray = results.map((i) => <li key={i.toString()}>{i.word}<button className="save" onClick={saveHandler(i.word)}>Save</button></li>)
-            // props.rhymeData.push(rhymeArray);
+            rhymeArray = results.map((i) => <li key={i.toString()}>{i.word}<button onClick={(e) => { e.stopPropagation(); saveHandler(i.word) }} className="save" >Save</button></li>)
             props.setRhymeData(rhymeArray);
             console.log(props.rhymeData);
         });
@@ -80,8 +83,8 @@ const WordInput = (props) => {
     function synonymHandler() {
         props.setSynonymFlag(true);
         datamuseRequest(getDatamuseSimilarToUrl(props.userWord), (results) => {
-            synonymArray = results.map((i) => <li key={i.toString()}>{i.word}<button className="save" onClick={saveHandler(i.word)}>Save</button></li>)
-            props.synonymData.push(synonymArray);
+            synonymArray = results.map((i) => <li key={i.toString()}>{i.word}<button className="save" onClick={(e) => { e.stopPropagation(); saveHandler(i.word) }}>Save</button></li>)
+            props.setSynonymData(synonymArray);
             console.log(props.synonymData);
         });
     }
