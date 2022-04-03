@@ -57,11 +57,11 @@ const WordInput = (props) => {
         return `https://api.datamuse.com/words?${(new URLSearchParams({ 'ml': input })).toString()}`;
     }
 
-    // function keyHandler(e) {
-    //     if (e.key === 'Enter') {
-    //         rhymeHandler();
-    //     }
-    // }
+    const keyHandler = (key) => {
+        if (key === 'Enter') {
+            rhymeHandler();
+        }
+    }
 
     const saveHandler = (input) => {
         console.log(`Input: ${input}`);
@@ -93,7 +93,7 @@ const WordInput = (props) => {
     return (
         <div className="row">
             <div className="input-group col">
-                <input onChange={(e) => props.setUserWord(e.target.value)} id="word_input" className="form-control" type="text" placeholder="Enter a word" />
+                <input onChange={(e) => props.setUserWord(e.target.value)} onKeyPress={(e) => keyHandler(e.key)} id="word_input" className="form-control" type="text" placeholder="Enter a word" />
                 <button onClick={rhymeHandler} id="show_rhymes" type="button" className="btn btn-primary">Show rhyming words</button>
                 <button onClick={synonymHandler} id="show_synonyms" type="button" className="btn btn-secondary">Show synonyms</button>
             </div>
