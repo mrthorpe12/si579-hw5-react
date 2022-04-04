@@ -114,7 +114,7 @@ const WordInput = (props) => {
     }
 
     function rhymeHandler() {
-        props.setRhymeFlag(true);
+        props.setSearchType('rhyme');
         datamuseRequest(getDatamuseRhymeUrl(props.userWord), (rhymeResults) => {
             rhymeArray = rhymeResults.map((i) => <li key={i.toString()}>{i.word}<button onClick={(e) => { e.stopPropagation(); saveHandler(i.word) }} className="save" >Save</button></li>)
             props.setDataOutput(rhymeArray);
@@ -123,7 +123,7 @@ const WordInput = (props) => {
     }
 
     function synonymHandler() {
-        props.setSynonymFlag(true);
+        props.setSearchType('synonym');
         datamuseRequest(getDatamuseSimilarToUrl(props.userWord), (synonymResults) => {
             synonymArray = synonymResults.map((i) => <li key={i.toString()}>{i.word}<button className="save" onClick={(e) => { e.stopPropagation(); saveHandler(i.word) }}>Save</button></li>)
             props.setDataOutput(synonymArray);

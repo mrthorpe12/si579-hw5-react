@@ -4,9 +4,9 @@ const WordOutput = (props) => {
 
     let header = '';
 
-    if (props.rhymeFlag) {
+    if (props.searchType === 'rhyme') {
         header = `Words that rhyme with ${props.userWord}`;
-    } else if (props.synonymFlag) {
+    } else if (props.searchType === 'synonym') {
         header = `Words with a similar meaning to ${props.userWord}`;
     }
 
