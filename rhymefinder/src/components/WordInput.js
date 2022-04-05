@@ -98,13 +98,18 @@ const WordInput = (props) => {
     function getDatamuseSimilarToUrl(input) {
         return `https://api.datamuse.com/words?${(new URLSearchParams({ 'ml': input })).toString()}`;
     }
-
+    /**
+     * Handles keyboard input.  If key pressed is 'Enter' key, calls rhymeHandler.
+     * @param  {string} key
+     */
     const keyHandler = (key) => {
         if (key === 'Enter') {
             rhymeHandler();
         }
     }
-
+    /**
+     * Retrieves JSON object containing list of rhymes.  Groups rhyme object by syllable and assigns grouped object to state variable.
+     */
     function rhymeHandler() {
         setLoadingStatus('Loading....')
         setSearchType('rhyme');
@@ -117,7 +122,9 @@ const WordInput = (props) => {
         });
         console.log(dataOutput);
     }
-
+    /**
+     * Retrieves JSON object containing list of synonyms.  Groups synonym object by syllable and assigns grouped object to state variable.
+     */
     function synonymHandler() {
         setLoadingStatus('Loading....')
         setSearchType('synonym');

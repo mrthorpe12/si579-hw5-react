@@ -12,7 +12,10 @@ const SyllableGroup = (props) => {
     if (searchType === 'rhyme') {
         syllableHeader = `Syllables: ${syllables}`;
     }
-
+    /**
+     * Accepts word passed by user when user clicks 'Save' button.  Adds word to local array and assigns updated local array to state variable.
+     * @param  {string} input: Word which the user wants to save.
+     */
     const saveHandler = (input) => {
         console.log(`Input: ${input}`);
         setSaveWord((savedWordArray) => {
@@ -28,7 +31,7 @@ const SyllableGroup = (props) => {
             {dataOutput.map((item) => {
                 return (
                     <li>
-                        {item.word}<button onClick={(e) => {saveHandler(item.word)}} class="save">Save</button>
+                        {item.word}<button onClick={(e) => { saveHandler(item.word) }} class="save">Save</button>
                     </li>
                 )
             })}
