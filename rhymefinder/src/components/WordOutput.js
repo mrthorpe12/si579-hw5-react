@@ -11,10 +11,13 @@ const WordOutput = (props) => {
     }
 
     return (
-        <div className="row">
-            <h2 className="col" id="output_description">{header}</h2>
-            <div className="output row">
-                <output id="word_output" className="col">{props.dataOutput}</output>
+        <div>
+            <h3>{props.resultStatus}</h3>
+            <div className="row">
+                <h2 className="col" id="output_description">{header}</h2>
+                <div className="output row">
+                    <output id="word_output" className="col">{props.dataOutput}</output>
+                </div>
             </div>
         </div>
     )
