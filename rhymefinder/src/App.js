@@ -17,8 +17,8 @@ function App() {
             <h1 className="row">Rhyme Finder (579 Problem Set 6)</h1>
             <p>Repo: <a href="https://github.com/mrthorpe12/si579-hw5-react">https://github.com/mrthorpe12/si579-hw5-react</a></p>
             <SavedWords saveWord={saveWord} setSaveWord={setSaveWord} />
-            <WordInput userWord={userWord} setUserWord={setUserWord} searchType={searchType} setSearchType={setSearchType} saveWord={saveWord} setSaveWord={setSaveWord} dataOutput={dataOutput} setDataOutput={setDataOutput} resultStatus={resultStatus} setResultStatus={setResultStatus} />
-            <WordOutput userWord={userWord} searchType={searchType} dataOutput={dataOutput} resultStatus={resultStatus}/>
+            <WordInput userWord={userWord} setUserWord={setUserWord} setSearchType={setSearchType} dataOutput={dataOutput} setDataOutput={setDataOutput} setResultStatus={setResultStatus} />
+            <WordOutput userWord={userWord} searchType={searchType} saveWord={saveWord} setSaveWord={setSaveWord} dataOutput={dataOutput} resultStatus={resultStatus} />
         </main>
     );
 }
