@@ -8,7 +8,7 @@ const WordOutput = (props) => {
     const { saveWord } = props;
     const { setSaveWord } = props;
     const { dataOutput } = props;
-    const { resultStatus } = props;
+    const { loadingStatus } = props;
 
     let outputHeader = '';
 
@@ -20,7 +20,7 @@ const WordOutput = (props) => {
 
     return (
         <div>
-            <h2>{resultStatus}</h2>
+            <h2>{loadingStatus}</h2>
             <div className="row">
                 <h2 className="col" id="output_description">{outputHeader}</h2>
                 <div className="output row">

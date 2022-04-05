@@ -7,7 +7,7 @@ const WordInput = (props) => {
     const { setSearchType } = props;
     const { dataOutput } = props;
     const { setDataOutput } = props;
-    const { setResultStatus } = props;
+    const { setLoadingStatus } = props;
 
     /**
      * Returns a list of objects grouped by some property. For example:
@@ -106,10 +106,10 @@ const WordInput = (props) => {
     }
 
     function rhymeHandler() {
-        setResultStatus('Loading....')
+        setLoadingStatus('Loading....')
         setSearchType('rhyme');
         datamuseRequest(getDatamuseRhymeUrl(userWord), (rhymeResults) => {
-            setResultStatus('');
+            setLoadingStatus('');
             // setDataOutput(rhymeResults.map((i) => <li key={i.toString()}>{i.word}<button onClick={(e) => { e.stopPropagation(); saveHandler(i.word) }} className="save" >Save</button></li>));
             if (rhymeResults.length !== 0) {
                 setDataOutput(groupBy(rhymeResults, 'numSyllables'))
@@ -119,10 +119,10 @@ const WordInput = (props) => {
     }
 
     function synonymHandler() {
-        setResultStatus('Loading....')
+        setLoadingStatus('Loading....')
         setSearchType('synonym');
         datamuseRequest(getDatamuseSimilarToUrl(userWord), (synonymResults) => {
-            setResultStatus('');
+            setLoadingStatus('');
             if (synonymResults.length !== 0) {
                 setDataOutput(groupBy(synonymResults, 'numSyllables'));
             }
