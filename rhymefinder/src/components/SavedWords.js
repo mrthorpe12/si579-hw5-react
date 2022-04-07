@@ -1,13 +1,15 @@
 import './SavedWords.css';
 
 const SavedWords = (props) => {
-    console.log('Saved words is working! Thank God!');
+    const { saveWord } = props;
+
+    // console.log('Saved words is working! Thank God!');
 
     const savedWordsOutput = () => {
-        if (props.saveWord.length === 0) {
+        if (saveWord.length === 0) {
             return "(no results)";
         } else {
-            return props.saveWord.join(', ');
+            return saveWord.join(', ');
         }
     }
 

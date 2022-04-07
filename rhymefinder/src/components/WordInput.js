@@ -1,11 +1,13 @@
 import './WordInput.css';
 
-// let groupedResults = [];
-let rhymeArray = [];
-let synonymArray = [];
-let savedWordArray = [];
-
 const WordInput = (props) => {
+
+    const { userWord } = props;
+    const { setUserWord } = props;
+    const { setSearchType } = props;
+    const { dataOutput } = props;
+    const { setDataOutput } = props;
+    const { setLoadingStatus } = props;
 
     /**
      * Returns a list of objects grouped by some property. For example:
@@ -96,46 +98,50 @@ const WordInput = (props) => {
     function getDatamuseSimilarToUrl(input) {
         return `https://api.datamuse.com/words?${(new URLSearchParams({ 'ml': input })).toString()}`;
     }
-
+    /**
+     * Handles keyboard input.  If key pressed is 'Enter' key, calls rhymeHandler.
+     * @param  {string} key
+     */
     const keyHandler = (key) => {
         if (key === 'Enter') {
             rhymeHandler();
         }
     }
-
-    const saveHandler = (input) => {
-        console.log(`Input: ${input}`);
-        // savedWordArray.push(input);
-        props.setSaveWord((savedWordArray) => {
-            const updatedWords = [...savedWordArray, input]
-            return updatedWords
-        })
-        console.log(props.saveWord);
-    }
-
+    /**
+     * Retrieves JSON object containing list of rhymes.  Groups rhyme object by syllable and assigns grouped object to state variable.
+     */
     function rhymeHandler() {
-        props.setSearchType('rhyme');
-        datamuseRequest(getDatamuseRhymeUrl(props.userWord), (rhymeResults) => {
-            rhymeArray = rhymeResults.map((i) => <li key={i.toString()}>{i.word}<button onClick={(e) => { e.stopPropagation(); saveHandler(i.word) }} className="save" >Save</button></li>)
-            props.setDataOutput(rhymeArray);
-            console.log(props.dataOutput);
+        setLoadingStatus('Loading....')
+        setSearchType('rhyme');
+        datamuseRequest(getDatamuseRhymeUrl(userWord), (rhymeResults) => {
+            setLoadingStatus('');
+            // setDataOutput(rhymeResults.map((i) => <li key={i.toString()}>{i.word}<button onClick={(e) => { e.stopPropagation(); saveHandler(i.word) }} className="save" >Save</button></li>));
+            if (rhymeResults.length !== 0) {
+                setDataOutput(groupBy(rhymeResults, 'numSyllables'))
+            }
         });
+        console.log(dataOutput);
     }
-
+    /**
+     * Retrieves JSON object containing list of synonyms.  Groups synonym object by syllable and assigns grouped object to state variable.
+     */
     function synonymHandler() {
-        props.setSearchType('synonym');
-        datamuseRequest(getDatamuseSimilarToUrl(props.userWord), (synonymResults) => {
-            synonymArray = synonymResults.map((i) => <li key={i.toString()}>{i.word}<button className="save" onClick={(e) => { e.stopPropagation(); saveHandler(i.word) }}>Save</button></li>)
-            props.setDataOutput(synonymArray);
-            console.log(props.dataOutput);
+        setLoadingStatus('Loading....')
+        setSearchType('synonym');
+        datamuseRequest(getDatamuseSimilarToUrl(userWord), (synonymResults) => {
+            setLoadingStatus('');
+            if (synonymResults.length !== 0) {
+                setDataOutput(groupBy(synonymResults, 'numSyllables'));
+            }
         });
+        console.log(dataOutput);
     }
 
 
     return (
         <div className="row">
             <div className="input-group col">
-                <input onChange={(e) => props.setUserWord(e.target.value)} onKeyPress={(e) => keyHandler(e.key)} id="word_input" className="form-control" type="text" placeholder="Enter a word" />
+                <input onChange={(e) => setUserWord(e.target.value)} onKeyPress={(e) => keyHandler(e.key)} id="word_input" className="form-control" type="text" placeholder="Enter a word" />
                 <button onClick={rhymeHandler} id="show_rhymes" type="button" className="btn btn-primary">Show rhyming words</button>
                 <button onClick={synonymHandler} id="show_synonyms" type="button" className="btn btn-secondary">Show synonyms</button>
             </div>
